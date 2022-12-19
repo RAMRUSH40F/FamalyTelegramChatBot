@@ -105,11 +105,8 @@ def update_shoplist(message):
 # String -> void
 def get_weather(chatid):
     weather, picture_name = Weather.get()
-    print(picture_name)
     bot.send_message(chatid, weather)
-    with open(picture_name, 'rb') as weather_icon:
-        print(os.getcwd())
-        print(os.listdir)
+    with open("../" + picture_name, 'rb') as weather_icon:
         bot.send_photo(chatid, weather_icon)
 
 # string -> boolean
