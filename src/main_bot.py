@@ -8,11 +8,9 @@ import pickle
 
 import schedule
 import time
-import threading
 import datetime
 
 bot = telebot.TeleBot(token)
-
 
 # This is a main tree of received message.
 def message_filter(message):
@@ -103,7 +101,7 @@ def add_to_shop_list(message):
 
 #  return a current shop_list as a list[]
 def get_shoplist():
-    with open('shoplistfile.bin', 'rb') as file:
+    with open("data/shoplistfile.bin", 'rb') as file:
         temp_list = pickle.load(file)
         return temp_list
 
@@ -112,7 +110,7 @@ def delete_shoplist(chat_id):
     if chat_id == admin_chat_id:
         print('p')
         starting_list = ['Кефир']
-        with open('shoplistfile.bin', 'wb') as file:
+        with open("data/shoplistfile.bin", 'wb') as file:
             pickle.dump(starting_list, file)
 
 
@@ -126,7 +124,7 @@ def write_to_shoplist_from_message(message):
     temp_list = set(temp_list)
     temp_list = list(temp_list)
 
-    with open('shoplistfile.bin', 'wb') as file:
+    with open('data/shoplistfile.bin', 'wb') as file:
         pickle.dump(temp_list, file)
 
 
@@ -307,17 +305,9 @@ def poll_answer_handler(_):
 
 if __name__ == '__main__':
 
-    global poll_info_status
-    global opt_yes, opt_no
-    opt_yes, opt_no, opt_mid = 0, 0, 0
-    poll_info_status = False
-
     while True:
         try:
             print('Включение', str(datetime.datetime.now().time())[:8])
-            thread1 = threading.Thread(target=morning_checker)
-            thread1.start()
             bot.polling(none_stop=True)
-        except:
-            print('Выключение', datetime.now().time()[:8])
-            time.sleep(5)
+        finally:
+            print('Выключение', str(datetime.time())[:8])

@@ -38,12 +38,12 @@ class Poll:
 
     @staticmethod
     def save_stats_to_json(new_info):
-        with open('Poll_info.json', 'w') as json_file:
+        with open('../data/Poll_info.json', 'w') as json_file:
             json.dump(new_info, json_file)
 
     @staticmethod
     def get_stats_from_json():
-        with open('Poll_info.json', 'r') as json_file:
+        with open('../data/Poll_info.json', 'r') as json_file:
             info = json.load(json_file)
             return info
 
