@@ -1,6 +1,4 @@
 import datetime
-import os
-import time
 
 import telebot
 from telebot import types
@@ -130,7 +128,9 @@ if __name__ == '__main__':
     while True:
         try:
             print('Включение', str(datetime.datetime.now().time())[:8])
-            bot.polling(none_stop=True)
+            bot.infinity_polling(True)
+        except:
+            time.sleep(15)
         finally:
             print('Выключение' + str(datetime.time())[:8])
 
