@@ -37,7 +37,7 @@ class Weather:
         text = f"Температура за окном +{res['main']['temp']}. " \
                f"Ощущается как {str(res['main']['feels_like'])}.\n {res['weather'][0]['description']}." \
                f" Солнце зайдет в {Weather.reformat_time(res['sys']['sunset'])} "
-        icon_path = 'icons/{}@2x.png'.format(res['weather'][0]['icon'])
+        icon_path = '../icons/{}@2x.png'.format(res['weather'][0]['icon'])
         return [text, icon_path]
 
 
