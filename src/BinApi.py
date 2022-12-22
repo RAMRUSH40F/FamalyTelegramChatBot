@@ -1,4 +1,3 @@
-import os
 import pickle
 
 from Famaly_chat_Telegram_bot.src.config import admin_chat_id
@@ -24,7 +23,6 @@ class ShoppingList:
     @staticmethod
     def delete(chat_id):
         if chat_id == admin_chat_id:
-            print('p')
             starting_list = ['Хлеб']
             with open("../data/shoplistfile.bin", 'wb') as file:
                 pickle.dump(starting_list, file)
