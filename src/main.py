@@ -5,7 +5,7 @@ from telebot import TeleBot, types
 
 from collections import OrderedDict
 
-from BinApi import ShoppingList
+from ShoppingListRepository import ShoppingList
 from Weather_api import Weather
 from config import token, starting_message
 
@@ -24,7 +24,7 @@ def message_handler(message):
                       }
     commands_list = ['меню', '@renatakamilabot', 'старт', 'начать', 'привет', 'назад']
     if command in commands_list:
-        # bot.send_message(message.chat.id,message.chat.id)
+        #bot.send_message(message.chat.id,message.chat.id)
         # bot.send_message(message.chat.id, message.json['from']['first_name'])
         show_main_menu(message)
 
@@ -74,7 +74,7 @@ def show_shopping_menu(message):
 
 # shopping list button
 # Telegram.message object -> void
-def get_shopping_list(message):
+def get_shopping_list(message: any) -> None:
     bot.delete_message(message.chat.id, message.id)
     bot.send_message(message.chat.id, '<b>Текущий список покупок:</b>', parse_mode='HTML')
     bot.send_message(message.chat.id, ', '.join(ShoppingList.get()))
@@ -83,7 +83,7 @@ def get_shopping_list(message):
 # Telegram.message object -> void
 def shoplist_update_handler(message):
     recommendation_text = 'В следующем предложении ты можешь написать ' \
-                          'список продуктов <b>через пробел</b>, чтобы добавить.'
+                          'список продуктов <b>через пробел</b>, чтобы добавить. Например: Хлеб Булка Молоко Шоколад(Альпен Голд)'
     sent = bot.send_message(message.chat.id, recommendation_text, parse_mode='HTML')
     bot.register_next_step_handler(sent, update_shoplist)
 
@@ -134,7 +134,7 @@ if __name__ == '__main__':
     while True:
         try:
             print('Включение', str(datetime.datetime.now().time())[:8])
-            bot.polling(none_stop=True)
+            bot.infinity_polling(none_stop=True)
         except RuntimeError:
             time.sleep(15)
         finally:
