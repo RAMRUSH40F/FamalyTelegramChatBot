@@ -23,12 +23,12 @@ class ShoppingList:
     @staticmethod
     def delete(chat_id):
         if chat_id == admin_chat_id:
-            starting_list = ['Хлеб']
+            starting_list = ["Хлеб"]
             with open("../data/shoplistfile.bin", 'wb') as file:
                 pickle.dump(starting_list, file)
 
+# For initializing list
 if __name__ =="__main__":
-
-    starting_list = ['Хлеб', 'Айран']
+    starting_list = ["Хлеб"]
     with open("../data/shoplistfile.bin", 'wb') as file:
         pickle.dump(starting_list, file)
